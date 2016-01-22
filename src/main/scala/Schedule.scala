@@ -10,12 +10,16 @@ import collection.JavaConversions._
   */
 case class Schedule(date: String, items: List[Item])
 case class Item(`type`: String, body: String) {
-  override def toString = s"【今日の乃木坂46】 [${`type`}]\n$body".take(140)
+  override def toString = s"【今日の乃木坂46】 [${`type`}]\n$body"
 }
 
 object Schedule {
 
   val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
+
+  def tweet = {
+    todaySchedule.map(TweetService.tweet)
+  }
 
   private def isToday(schedule: Schedule) = {
     schedule.date == ("%td" format new Date)

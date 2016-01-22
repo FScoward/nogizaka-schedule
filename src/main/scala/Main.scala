@@ -12,11 +12,9 @@ object Main {
   val twitter = TwitterFactory.getSingleton
 
   def main(args: Array[String]): Unit = {
-
-    val todays = Schedule.todaySchedule.toList
-    todays.headOption.map(_.items.map(item => twitter.updateStatus(item.toString)))
+    Schedule.tweet
     Affiliate.tweet
-    NewInfo.getNewInfo.filter(_.isToday).foreach(newInfo => twitter.updateStatus(newInfo.toString))
+    NewInfo.tweet
   }
 
 }

@@ -17,6 +17,10 @@ case class NewInfo(date: String, title: String, summary: String) {
 object NewInfo {
   val newInfoUrl = "http://www.nogizaka46.com/news/"
 
+  def tweet = {
+    getNewInfo.map(TweetService.tweet)
+  }
+
   def getNewInfo = {
     val htmlDocument = Jsoup.connect(newInfoUrl).get()
     val elements = htmlDocument.select("li.clearfix.noborder").iterator()

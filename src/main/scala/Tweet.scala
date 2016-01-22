@@ -5,5 +5,5 @@ import twitter4j.TwitterFactory
   */
 object TweetService {
   val twitter = TwitterFactory.getSingleton
-  def tweet(target: {def toString(): String}) = twitter.updateStatus(target.toString)
+  def tweet(target: {def toString(): String}) = twitter.updateStatus(s"${target.toString} #乃木坂46".take(140))
 }

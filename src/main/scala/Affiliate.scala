@@ -2,7 +2,7 @@
   * Created by Fumiyasu on 2016/01/23.
   */
 case class Affiliate(title: String, link: String) {
-  override def toString = s"【宣伝】$link\n$title".take(140)
+  override def toString = s"【宣伝】$link\n$title"
 }
 
 object Affiliate {
