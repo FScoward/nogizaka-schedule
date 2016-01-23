@@ -8,7 +8,7 @@ import collection.JavaConversions._
 
 case class NewInfo(date: String, title: String, summary: String) {
   def isToday = ("%tY.%<tm.%<td" format new Date) == date
-  override def toString = s"【今日の新着】\n$title\n$summary".take(140)
+  override def toString = s"【今日の新着】\n$title\n$summary"
 }
 
 /**
@@ -18,7 +18,7 @@ object NewInfo {
   val newInfoUrl = "http://www.nogizaka46.com/news/"
 
   def tweet = {
-    getNewInfo.map(TweetService.tweet)
+    getNewInfo.filter(_.isToday).map(TweetService.tweet)
   }
 
   def getNewInfo = {

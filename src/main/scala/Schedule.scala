@@ -18,7 +18,7 @@ object Schedule {
   val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
 
   def tweet = {
-    todaySchedule.map(TweetService.tweet)
+    todaySchedule.map(_.items).map(_.foreach(TweetService.tweet))
   }
 
   private def isToday(schedule: Schedule) = {
