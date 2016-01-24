@@ -12,9 +12,10 @@ object Main {
   val twitter = TwitterFactory.getSingleton
 
   def main(args: Array[String]): Unit = {
-    Schedule.tweet
-    Affiliate.tweet
-    NewInfo.tweet
+//    Schedule.tweet
+//    Affiliate.tweet
+//    NewInfo.tweet
+    News.crawl
   }
 
 }
