@@ -2,6 +2,7 @@
 ### Scala template
 *.class
 *.log
+*.log.*
 
 # sbt specific
 .cache
@@ -26,5 +27,6 @@ project/plugins/project/
 out
 gen
 
+/src/main/resources/application.conf
 # twitter4j
 twitter4j.properties
