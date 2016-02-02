@@ -1,5 +1,6 @@
 import java.util.Date
 
+import com.typesafe.scalalogging.LazyLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
@@ -13,7 +14,7 @@ case class Item(`type`: String, body: String) {
   override def toString = s"【今日の乃木坂46】 [${`type`}]\n$body"
 }
 
-object Schedule {
+object Schedule extends LazyLogging {
 
   val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
 
@@ -22,7 +23,7 @@ object Schedule {
   }
 
   private def isToday(schedule: Schedule) = {
-    schedule.date == ("%td" format new Date)
+    schedule.date == ("%te" format new Date)
   }
 
   /**

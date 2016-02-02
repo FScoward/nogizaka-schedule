@@ -1,5 +1,6 @@
 import java.util.Date
 
+import com.typesafe.scalalogging.LazyLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import scalaz._
@@ -14,10 +15,11 @@ case class NewInfo(date: String, title: String, summary: String) {
 /**
   * Created by Fumiyasu on 2016/01/22.
   */
-object NewInfo {
+object NewInfo extends LazyLogging {
   val newInfoUrl = "http://www.nogizaka46.com/news/"
 
   def tweet = {
+    logger.info(s"==================NewInfo START")
     getNewInfo.filter(_.isToday).map(TweetService.tweet)
   }
 
