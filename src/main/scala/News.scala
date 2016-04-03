@@ -34,7 +34,7 @@ object News extends LazyLogging {
 
   def crawlLivedoorNews() = {
     val livedoorNews = "http://news.livedoor.com/%E4%B9%83%E6%9C%A8%E5%9D%8246/topics/keyword/24004/"
-    val document = Jsoup.connect(livedoorNews).get()
+    val document = JsoupClient.get(livedoorNews)
     val articleList = document.select(".articleList")
     articleList.map(news).filter(_.isToday).map(TweetService.tweet)
   }

@@ -16,6 +16,7 @@ case class Item(`type`: String, body: String) {
 
 object Schedule extends LazyLogging {
 
+//  val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
   val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
 
   def tweet = {
@@ -32,7 +33,7 @@ object Schedule extends LazyLogging {
     * @return today schedule
     * */
   def todaySchedule = {
-    val htmlDocument = Jsoup.connect(nogizakaScheduleUrl).get()
+    val htmlDocument = JsoupClient.get(nogizakaScheduleUrl)
     val scheduleTableListEl = htmlDocument
       .select("div#scheduleTable")
       .select(".scheduleTableList")

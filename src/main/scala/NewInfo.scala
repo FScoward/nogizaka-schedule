@@ -24,7 +24,7 @@ object NewInfo extends LazyLogging {
   }
 
   def getNewInfo = {
-    val htmlDocument = Jsoup.connect(newInfoUrl).get()
+    val htmlDocument = JsoupClient.get(newInfoUrl)
     val elements = htmlDocument.select("li.clearfix.noborder").iterator()
     elements.map(extractNewInfo).toList
   }
