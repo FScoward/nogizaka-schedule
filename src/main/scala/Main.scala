@@ -8,10 +8,11 @@ object Main {
   val twitter = TwitterFactory.getSingleton
 
   def main(args: Array[String]): Unit = {
-    Schedule.tweet
-    Affiliate.tweet
-    NewInfo.tweet
-    News.crawlLivedoorNews
+//    Schedule.tweet
+//    NewInfo.tweet
+    Blog.tweet
+//    Affiliate.tweet
+//    News.crawlLivedoorNews
 //    News.googleNews
   }
 
