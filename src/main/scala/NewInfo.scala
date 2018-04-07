@@ -3,8 +3,6 @@ import java.util.Date
 import com.typesafe.scalalogging.LazyLogging
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import scalaz._
-import Scalaz._
 import collection.JavaConversions._
 
 case class NewInfo(date: String, title: String, summary: String) {
@@ -20,7 +18,7 @@ object NewInfo extends LazyLogging {
 
   def tweet = {
     logger.info(s"==================NewInfo START")
-    getNewInfo.filter(_.isToday).map(TweetService.tweet)
+//    getNewInfo.filter(_.isToday).map(TweetService.tweet)
   }
 
   def getNewInfo = {

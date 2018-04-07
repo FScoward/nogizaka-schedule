@@ -1,3 +1,6 @@
+import com.google.inject.Guice
+import modules.Modules
+import service.{AffiliateService, OutputService}
 import twitter4j.TwitterFactory
 
 /**
@@ -8,10 +11,16 @@ object Main {
   val twitter = TwitterFactory.getSingleton
 
   def main(args: Array[String]): Unit = {
-    Schedule.tweet
-    NewInfo.tweet
-    Blog.tweet
-    Affiliate.tweet
+    val injector = Guice.createInjector(new Modules())
+
+    import net.codingwell.scalaguice.InjectorExtensions._
+
+    val outputService = injector.instance[OutputService]
+    val schedule = new ScheduleService().todaySchedule
+    outputService.showAll(schedule.flatMap(_.items))
+//    NewInfo.tweet
+//    Blog.tweet
+    outputService.show(AffiliateService.getOne)
 //    News.crawlLivedoorNews
 //    News.googleNews
   }

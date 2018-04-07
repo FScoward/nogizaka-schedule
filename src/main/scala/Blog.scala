@@ -24,7 +24,7 @@ object Blog extends LazyLogging {
       .filter(syndFeed => PublishedDate(syndFeed.getPublishedDate.getTime).isLaterThanLastTime)
       .map(syndFeed => {
         val text = s"${syndFeed.getAuthor}\n${syndFeed.getLink}\n${syndFeed.getTitle}"
-        TweetService.tweet(text)
+//        TweetService.tweet(text)
     })
 
   }

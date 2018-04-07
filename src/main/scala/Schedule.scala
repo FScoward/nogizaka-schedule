@@ -1,27 +1,16 @@
 import java.util.Date
 
 import com.typesafe.scalalogging.LazyLogging
-import org.jsoup.Jsoup
+import models.{Item, Schedule}
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
-import collection.JavaConversions._
 
-/**
-  * Created by Fumiyasu on 2016/01/23.
-  */
-case class Schedule(date: String, items: List[Item])
-case class Item(`type`: String, body: String) {
-  override def toString = s"【今日の乃木坂46】 [${`type`}]\n$body"
-}
+import collection.JavaConverters._
 
-object Schedule extends LazyLogging {
+class ScheduleService extends LazyLogging {
 
 //  val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
   val nogizakaScheduleUrl = "http://www.nogizaka46.com/schedule/"
-
-  def tweet = {
-    todaySchedule.map(_.items).map(_.foreach(TweetService.tweet))
-  }
 
   private def isToday(schedule: Schedule) = {
     schedule.date == ("%te" format new Date)
@@ -38,14 +27,14 @@ object Schedule extends LazyLogging {
       .select("div#scheduleTable")
       .select(".scheduleTableList")
 
-    scheduleTableListEl.map(parseSchedule).filter(isToday)
+    scheduleTableListEl.asScala.map(parseSchedule).filter(isToday)
   }
 
   /**
     * スケジュールリストからスケジュールをparseする
     *
     * @param element .scheduleTableList element
-    * @return Schedule
+    * @return models.Schedule
     * */
   private def parseSchedule(element: Element): Schedule = {
     val date = element
@@ -60,10 +49,10 @@ object Schedule extends LazyLogging {
     * 特定の一日のスケジュールのリストから予定の種別と内容を取り出す
     *
     * @param items schedule items
-    * @return Sequence of Item
+    * @return Sequence of models.Item
     * */
   private def parseItems(items: Elements): Seq[Item] = {
-    items.map(item => {
+    items.asScala.map(item => {
       Item(item.className(), item.text)
     }).toSeq
   }

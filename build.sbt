@@ -11,9 +11,9 @@ libraryDependencies ++= Seq(
   "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0",
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "joda-time" % "joda-time" % "2.9.1",
-  "com.typesafe" % "config" % "1.3.0",
+  "com.typesafe" % "config" % "1.3.3",
   "com.typesafe.play" % "play-ws_2.11" % "2.4.6",
   "rome" % "rome" % "1.0",
-  "rome" % "rome-fetcher" % "1.0"
-
+  "rome" % "rome-fetcher" % "1.0",
+  "net.codingwell" %% "scala-guice" % "4.1.1"
 )
